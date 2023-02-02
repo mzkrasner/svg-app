@@ -23,6 +23,16 @@ router.post('/log', accountController.verifyUser, cookieController.setSSIDCookie
     res.status(201).send(res.locals.svgs);
   });
 
+  router.delete('/svg', svgController.checkDeleteSVG, svgController.deleteSVG,
+  (req, res) => {
+    res.status(201).send(res.locals.deleted);
+  });
+
+  router.patch('/svg', svgController.checkDeleteSVG, svgController.updateSVG,
+  (req, res) => {
+    res.status(201).send(res.locals.updated);
+  });
+
   router.get('/logout', sessionController.endSession, 
   (req, res) => {
     res.clearCookie('ssid');

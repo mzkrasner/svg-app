@@ -36,7 +36,7 @@ accountController.createAccount = (req, res, next) => {
     Account.find({_id:o_id}).exec()
       .then((data) => {
         console.log('we got into the check user method');
-        console.log(data);
+        //console.log(data);
         const {firstName, lastName, email} = data[0];
         res.locals.userSession = {firstName, lastName, email};
         next();
@@ -73,7 +73,7 @@ accountController.getAccount = (req, res, next) => {
 
   Account.find({}).exec()
     .then(item => {
-      console.log(item);
+      //console.log(item);
       return next();
     })
     .catch(err => {
@@ -90,21 +90,17 @@ accountController.verifyUser = (req, res, next) => {
     // write code here
     const {email, password} = JSON.parse(req.body);
     //console.log('we are here')
-    console.log(req.body)
+    //console.log(req.body)
     const controller = (passPhrase) => {
       
       console.log(passPhrase, 'this is the password');
       Account.find({email}, 'password').exec()
         .then((data) =>{
           console.log(data);
-          if(data.length === 0){
-            res.locals.shouldRedirect = true; 
-          }
+          
           bcrypt.compare(passPhrase, data[0].password, function(err, res) {
             console.log(res, 'this is the res');
-            if(!res){
-              res.locals.shouldRedirect = true; 
-            }
+            
           });
           
           next();

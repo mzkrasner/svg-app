@@ -17,6 +17,8 @@ function Dashboard() {
   const [cookie, setHasCookie] = useState("");
   const [svgs, setSvgs] = useState("");
   const [upload, setUpload] = useState("");
+  const [update, setUpdate] = useState("");
+  const [deletion, setDelete] = useState("");
   const [loggedOut, setLogOut] = useState('');
   const navigate = useNavigate();
 
@@ -65,10 +67,12 @@ function Dashboard() {
     );
     //console.log(decodedSvg);
     // let blob = new Blob([decodedSvg], { type: "image/svg+xml" });
-    // url = URL.createObjectURL(blob);
+    // console.log(blob)
+    // let newestItem = URL.createObjectURL(blob);
+    // console.log(newestItem)
 
     let source = decodedSvg.toString();
-
+    
     return source;
     // return <img src={url} alt={`image for ${appTitle}`} />;
     // return svgs;
@@ -80,10 +84,58 @@ function Dashboard() {
     // )
   }
 
+  function createUpdateName(){
+    setUpdate(true);
+  }
+
+  function updateName(event) {
+    console.log(event.target.id.replace('rename-', ''));
+    const targetUpdate = event.target.id.replace('rename-', '');
+    const input = document.getElementById('update-box').value;
+    if(!input){
+      alert('Your update must have a new name');
+      setUpdate(false);
+    }
+    else {
+      fetch("http://localhost:3000/account/svg", {
+        method: "PATCH",
+        credentials: "include",
+        body: JSON.stringify({id: targetUpdate, newName: input}),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    
+  }
+
+  function deleteItem(event) {
+    console.log(event.target.id.replace('delete-', ''));
+    const targetDelete = event.target.id.replace('delete-', '');
+    fetch("http://localhost:3000/account/svg", {
+      method: "DELETE",
+      credentials: "include",
+      body: JSON.stringify({id: targetDelete}),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        //console.log(data);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   const uploadSvg = () => {
     return (
       <div className="Home-header1">
-        <h1 className="Account-header">Welcome, {cookie.firstName}</h1>
+        <h1 className="Account-header">Upload new files below, {cookie.firstName}</h1>
         <textarea className="svg-input" type="text" id="input-textarea" placeholder="Place SVG Code Here..."></textarea>
         <textarea className="svg-name" type="text" id="input-name"  placeholder="SVG Name"></textarea>
         <Button variant="primary" size="sm" className="upload-svg" onClick={createAndUpload}>
@@ -117,7 +169,7 @@ function Dashboard() {
         .then((data) => {
           console.log(data);
           //setSignedUp(data);
-          window.location.reload();
+          //window.location.reload();
         }).catch((error) => {
           console.log(error)
         });
@@ -163,12 +215,19 @@ function Dashboard() {
     const resToDisplay = [];
     for (let i = 0; i < svgs.length; i++) {
       //let newDiv = ConvertToImageFormat(svgs[i].svField);
-      let newSvg = <InlineSVG className="grid-item1" src={ConvertToImageFormat(svgs[i].svField)} />
+      let newSvg = <InlineSVG className="grid-item2" src={ConvertToImageFormat(svgs[i].svField)} id={svgs[i]._id}/>
       // console.log(newSvg)
-      console.log(svgs[i])
+      console.log(svgs[i]);
       let newDiv = 
       <div key={i} className="grid-item1" >
       <p className="svg-grid-name">{svgs[i].labelName}</p>
+      <div className="update-buttons">
+      {!update &&<Button variant="info" size="sm" className="mod-buttons"  onClick={createUpdateName}>Rename</Button>}
+      {update && <div className="update-div"><input id="update-box" className="update-box"></input><div><button className="submit-button-box" id={`rename-${svgs[i]._id}`} onClick={updateName}>Submit</button><button className="submit-button-box2" onClick={() => setUpdate(false)}>Cancel</button></div></div>}
+       <Button variant="danger" size="sm" className="mod-buttons" id={`delete-${svgs[i]._id}`} onClick={deleteItem}>Delete</Button>
+      
+      </div>
+      
       {newSvg}
       </div>
       
@@ -191,7 +250,7 @@ function Dashboard() {
         <Button variant="primary" size="sm" className="upload-svg" onClick={upload}>
           Upload More
         </Button>
-        <h2>Your SVGs: </h2>
+        <h2>You have {svgs.length} SVGs in your collection: </h2>
         <div className="svg-grid1">{resToDisplay}</div>
       </div>
     );

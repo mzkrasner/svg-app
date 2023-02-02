@@ -46,22 +46,40 @@ a:hover {
   display: flex;
   flex-direction: row;
   width: 80vw;
-  margin: 50 auto;
+  margin: 100 auto;
   align-items: center;
   justify-content: space-around;
 }
 
 .grid-item1 {
-  height: fit-content;
+  height: 15vw;
   display: flex;
   flex-direction: column;
   width: 15vw;
   // border: 1px solid $tertiary-font-color;
   display: flex;
   // min-width: 280px;
-  
+  justify-content: center;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
-  
+  svg {
+    margin: auto;
+  }
+}
+
+.grid-item2{
+  position: relative; 
+ height: 0; 
+ width: 100%; 
+ padding: 0;
+ padding-bottom: 100%; 
+}
+
+.something{
+  position: relative; 
+  height: 100%; 
+  width: 100%; 
+  left: 0; 
+  top: 0;
 }
 
 h1 {

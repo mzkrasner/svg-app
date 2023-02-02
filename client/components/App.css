@@ -92,14 +92,61 @@ background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
 }
 .svg-grid-name{
   color: black;
+  font-size: 1.5vw;
+}
+
+.update-buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 10px;
+}
+
+.update-div{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.mod-buttons{
+  font-size: 10px;
+  height: 30px;
+  width: 100px;
+  margin: 5px;
+}
+
+.update-box{
+  height: 2vw;
+  margin: auto;
+  font-size: 1vw;
+  width: 100%;
+}
+.submit-button-box{
+  height: 20px;
+  width: 50%;
+  margin: auto;
+  border: none;
+  background: green;
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.submit-button-box2{
+  height: 20px;
+  width: 50%;
+  margin: auto;
+  border: none;
+  background: blue;
+  border-radius: 5px;
+  font-size: 10px;
 }
 
 .svg-name{
   width: 20%;
-  margin: 0 auto;
   background-color:#cdeaf4;
   height: 50px;
   font-size:20px;
+  margin: 0 auto;
 }
 
 .sign-up1{
