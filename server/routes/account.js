@@ -23,6 +23,12 @@ router.post('/log', accountController.verifyUser, cookieController.setSSIDCookie
     res.status(201).send(res.locals.svgs);
   });
 
+  router.get('/logout', sessionController.endSession, 
+  (req, res) => {
+    res.clearCookie('ssid');
+   res.send('ssid cookie cleared');
+  });
+
   router.post('/upload', svgController.addSvg, 
   (req, res) => {
     res.status(201).send({ users: res.locals.newUser });

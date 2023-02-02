@@ -46,5 +46,25 @@ sessionController.startSession = (req, res, next) => {
     });
 }
 
+sessionController.endSession = (req, res, next) => {
+  //write code here
+  console.log(req.cookies.ssid );
+  res.clearCookie('ssid');
+   next();
+  // Session.delete({cookieId: req.cookies.ssid})
+  //   .then((data) => {
+  //     console.log('successfully deleted session document');
+  //     res.clearCookie('ssid');
+  //     res.locals.clearedCookie = data;
+  //     next();
+  //   })
+  //   .catch(err => {
+  //     next({
+  //       status: 400,
+  //       err: { err: err}
+  //     });
+  //   });
+}
+
 
 module.exports = sessionController;

@@ -52,7 +52,9 @@ a:hover {
 }
 
 .grid-item1 {
-  height: 10vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
   width: 15vw;
   // border: 1px solid $tertiary-font-color;
   display: flex;
