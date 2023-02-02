@@ -5,12 +5,19 @@ import Features from '../../components/features.js';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 function Homepage() {
   const navigate = useNavigate();
 
     return (
+      
       <div className="Home">
+        <Helmet>
+        <title>SVG App - Upload and Store SVGs for Free</title>
+        <meta name="description" content="You can upload and store SVGs for free using this app" />
+        
+      </Helmet>
         <Topnav />
         <header className="Home-header">
         

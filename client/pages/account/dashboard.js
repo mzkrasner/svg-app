@@ -10,6 +10,7 @@ import base64 from "react-native-base64";
 import InlineSVG from "svg-inline-react";
 import ReactDOMServer from 'react-dom/server';
 import svg64 from 'svg64'; 
+import { Helmet } from 'react-helmet';
 
 const initialState = undefined;
 
@@ -70,9 +71,9 @@ function Dashboard() {
     // console.log(blob)
     // let newestItem = URL.createObjectURL(blob);
     // console.log(newestItem)
-
+      
     let source = decodedSvg.toString();
-    console.log(source);
+    //console.log(source);
     return source;
     // return <img src={url} alt={`image for ${appTitle}`} />;
     // return svgs;
@@ -84,8 +85,9 @@ function Dashboard() {
     // )
   }
 
-  function createUpdateName(){
-    setUpdate(true);
+  function createUpdateName(e){
+    console.log(e.target.id)
+    setUpdate(e.target.id);
   }
 
   function updateName(event) {
@@ -220,13 +222,14 @@ function Dashboard() {
       //let newDiv = ConvertToImageFormat(svgs[i].svField);
       let newSvg = <InlineSVG className="grid-item2" src={ConvertToImageFormat(svgs[i].svField)} id={svgs[i]._id}/>
       // console.log(newSvg)
-      console.log(svgs[i]);
+      //console.log(svgs[i]);
+      
       let newDiv = 
       <div key={i} className="grid-item1" >
       <p className="svg-grid-name">{svgs[i].labelName}</p>
       <div className="update-buttons">
-      {!update &&<Button variant="info" size="sm" className="mod-buttons"  onClick={createUpdateName}>Rename</Button>}
-      {update && <div className="update-div"><input id="update-box" className="update-box"></input><div><button className="submit-button-box" id={`rename-${svgs[i]._id}`} onClick={updateName}>Submit</button><button className="submit-button-box2" onClick={() => setUpdate(false)}>Cancel</button></div></div>}
+      {(update !== svgs[i]._id) &&<Button variant="info" size="sm" className="mod-buttons" id={`${svgs[i]._id}`} onClick={createUpdateName}>Rename</Button>}
+      {(update == svgs[i]._id) && <div className="update-div"><input id="update-box" className="update-box"></input><div><button className="submit-button-box" id={`rename-${svgs[i]._id}`} onClick={updateName}>Submit</button><button className="submit-button-box2" onClick={() => setUpdate(false)}>Cancel</button></div></div>}
        <Button variant="danger" size="sm" className="mod-buttons" id={`delete-${svgs[i]._id}`} onClick={deleteItem}>Delete</Button>
       
       </div>
@@ -263,6 +266,11 @@ function Dashboard() {
 
   return (
     <div className="Home">
+      <Helmet>
+        <title>Account - View, Upload, Delete, and Update SVGs</title>
+        <meta name="description" content="Store, upload, and delete SVGs here" />
+        
+      </Helmet>
       <Topnav />
       {svgs && !upload && loggedInheader()}
       {upload && uploadSvg()}

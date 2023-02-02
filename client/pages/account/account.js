@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import React, { useEffect, useState } from "react";
 import "./form.scss";
 import { useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 const initialState = undefined;
 
@@ -252,6 +253,11 @@ function Account() {
   
   return (
     <div className="Home">
+      <Helmet>
+        <title>Log Into Your Account</title>
+        <meta name="description" content="Store, upload, and delete SVGs here" />
+        
+      </Helmet>
       <Topnav />
 
       {!createAccount && !logIn && !signedUp && defaultHeader()}
