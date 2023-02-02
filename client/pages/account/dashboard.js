@@ -125,7 +125,7 @@ function Dashboard() {
       .then((res) => res.json())
       .then((data) => {
         //console.log(data);
-        
+        window.location.reload();
       })
       .catch((error) => {
         console.log(error);
@@ -169,7 +169,7 @@ function Dashboard() {
         .then((data) => {
           console.log(data);
           //setSignedUp(data);
-          //window.location.reload();
+          window.location.reload();
         }).catch((error) => {
           console.log(error)
         });

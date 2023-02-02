@@ -96,7 +96,7 @@ const svgController = {};
    .then((data) => {
      console.log('successful delete');
      res.locals.deleted = data;
-     
+     next();
    })
    .catch(err => {
      next({
