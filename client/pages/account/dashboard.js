@@ -72,7 +72,7 @@ function Dashboard() {
     // console.log(newestItem)
 
     let source = decodedSvg.toString();
-    
+    console.log(source);
     return source;
     // return <img src={url} alt={`image for ${appTitle}`} />;
     // return svgs;
@@ -135,6 +135,9 @@ function Dashboard() {
   const uploadSvg = () => {
     return (
       <div className="Home-header1">
+        <Button variant="secondary" size="sm" className="log-out" onClick={() => setUpload(false)}>
+          Back
+        </Button>
         <h1 className="Account-header">Upload new files below, {cookie.firstName}</h1>
         <textarea className="svg-input" type="text" id="input-textarea" placeholder="Place SVG Code Here..."></textarea>
         <textarea className="svg-name" type="text" id="input-name"  placeholder="SVG Name"></textarea>

@@ -4,8 +4,11 @@ import SVG from "./item.js";
 import Features from '../../components/features.js';
 import Button from 'react-bootstrap/Button';
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 function Homepage() {
+  const navigate = useNavigate();
+
     return (
       <div className="Home">
         <Topnav />
@@ -13,10 +16,10 @@ function Homepage() {
         
           <h1 className="Splash-header">Host Your Favorite<br></br><SVG /><br></br>collection for Free</h1>
           <div className = "sign-buttons">
-          <Button variant="primary" size="md" className = "sign-up">
+          <Button variant="primary" size="md" className = "sign-up" onClick={() => navigate("/account")}>
           Sign Up
         </Button>
-        <Button variant="outline-warning" size="md" className = "log-in">
+        <Button variant="outline-warning" size="md" className = "log-in" onClick={() => navigate("/account")}>
           Log In
         </Button>
           </div>
