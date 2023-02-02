@@ -134,6 +134,15 @@ function Dashboard() {
       });
   }
 
+  function copyItem(item) {
+    console.log(item.props.src);
+    const copiedItem = item.props.src;
+    navigator.clipboard.writeText(item.props.src).then(() => {
+      alert("Your SVG has been copied to the clipboard");
+    });
+    
+  }
+
   const uploadSvg = () => {
     return (
       <div className="Home-header1">
@@ -231,7 +240,7 @@ function Dashboard() {
       {(update !== svgs[i]._id) &&<Button variant="info" size="sm" className="mod-buttons" id={`${svgs[i]._id}`} onClick={createUpdateName}>Rename</Button>}
       {(update == svgs[i]._id) && <div className="update-div"><input id="update-box" className="update-box"></input><div><button className="submit-button-box" id={`rename-${svgs[i]._id}`} onClick={updateName}>Submit</button><button className="submit-button-box2" onClick={() => setUpdate(false)}>Cancel</button></div></div>}
        <Button variant="danger" size="sm" className="mod-buttons" id={`delete-${svgs[i]._id}`} onClick={deleteItem}>Delete</Button>
-      
+       <Button variant="secondary" size="sm" className="mod-buttons" id={`copy-${svgs[i]._id}`} onClick={() => copyItem(newSvg)}>Copy</Button>
       </div>
       
       {newSvg}
