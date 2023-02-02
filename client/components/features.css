@@ -1,0 +1,24 @@
+.grid-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: auto;
+  }
+  .grid-item {
+    
+   display: flex;
+   flex-direction: column;
+   margin: auto;
+    padding: 30px;
+    font-size: 30px;
+    text-align: center;
+    width: 400px;
+    font-size: 20px;
+  }
+
+  .Feature-img{
+    height: 75px;
+    width: auto;
+    margin: auto;
+    margin-top: 20px;
+  }
